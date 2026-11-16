@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Avtosalon — mashinalar sotuvi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#eef1f4;--ink:#14202b;--muted:#5b6977;--line:#cdd5dd;--card:#fff;--turq:#0a6e8a;--sun:#f2b705;--err:#b3261e}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.5 Barlow,system-ui,sans-serif}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--turq);outline-offset:2px}
+.top{background:var(--ink);color:#fff}
+.top .in{max-width:1100px;margin:0 auto;padding:14px 20px;display:flex;justify-content:space-between;align-items:center;gap:16px}
+.logo{font:700 26px/1 "Barlow Condensed",sans-serif;letter-spacing:.02em}
+.logo span{color:var(--sun)}
+.top a.tel{font-weight:600;text-decoration:none;border:2px solid var(--sun);color:var(--sun);padding:6px 14px;border-radius:4px}
+.hero{background:var(--turq);color:#fff}
+.hero .in{max-width:1100px;margin:0 auto;padding:44px 20px 56px}
+h1{margin:0 0 6px;font:700 clamp(40px,7vw,72px)/.98 "Barlow Condensed",sans-serif}
+.hero p{margin:0 0 26px;font-size:18px;max-width:46ch}
+.search{display:grid;grid-template-columns:2fr 1fr 1fr;gap:10px;background:#fff;color:var(--ink);padding:12px;border-radius:6px;border-bottom:6px solid var(--sun)}
+.search label{display:block;font-size:13px;font-weight:600;color:var(--muted)}
+.search input,.search select{width:100%;margin-top:2px;padding:11px 12px;font:inherit;color:inherit;background:#fff;border:1px solid var(--line);border-radius:4px}
+main{max-width:1100px;margin:0 auto;padding:28px 20px 64px}
+.bar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:18px}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{font:600 17px/1 "Barlow Condensed",sans-serif;padding:9px 14px;border-radius:99px;border:2px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer}
+.chip[aria-pressed=true]{background:var(--ink);color:#fff}
+#count{color:var(--muted);font-weight:500}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:8px;overflow:hidden;display:flex;flex-direction:column}
+.pic{background:linear-gradient(#dfe6ec,#eef1f4);padding:18px 18px 0;border-bottom:4px solid var(--ink)}
+.pic svg{display:block;width:100%;height:auto}
+.pic img{display:block;width:100%;height:150px;object-fit:cover}
+.body{padding:16px 18px 18px;display:flex;flex-direction:column;gap:12px;flex:1}
+.name{font:700 28px/1.05 "Barlow Condensed",sans-serif;margin:0}
+.plate{display:inline-flex;align-items:stretch;border:2px solid var(--ink);border-radius:4px;overflow:hidden;font:700 20px/1 "Barlow Condensed",sans-serif;align-self:flex-start;background:#fff}
+.plate i{background:var(--turq);color:#fff;font-style:normal;font-size:12px;padding:5px 6px;display:flex;align-items:flex-end}
+.plate b{padding:5px 12px;letter-spacing:.06em}
+.price{font:700 26px/1 "Barlow Condensed",sans-serif;color:var(--turq)}
+.price.none{font:500 16px/1.2 Barlow,sans-serif;color:var(--muted)}
+.foot{margin-top:auto;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.btn{font:600 18px/1 "Barlow Condensed",sans-serif;padding:11px 18px;border-radius:4px;border:2px solid var(--ink);background:var(--ink);color:#fff;cursor:pointer;text-decoration:none;display:inline-block}
+.btn.sun{background:var(--sun);color:var(--ink)}
+.btn.ghost{background:transparent;color:var(--ink)}
+.msg{padding:36px 0;color:var(--muted);font-size:18px}
+.msg.err{color:var(--err)}
+dialog{border:0;border-radius:8px;padding:0;width:min(520px,92vw);color:var(--ink)}
+dialog::backdrop{background:rgba(20,32,43,.6)}
+dialog .pic{border-bottom-width:4px}
+dialog .body{padding:20px}
+dialog dl{display:grid;grid-template-columns:auto 1fr;gap:6px 18px;margin:0}
+dialog dt{color:var(--muted)} dialog dd{margin:0;font-weight:500}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+footer{background:var(--ink);color:#aab6c2;text-align:center;padding:22px 20px;font-size:14px}
+footer a{color:#fff}
+@media(max-width:760px){.search{grid-template-columns:1fr}.top a.tel{display:none}}
+</style>
+</head>
+<body>
+<header class="top"><div class="in">
+  <div class="logo">AVTO<span>SALON</span></div>
+  <a class="tel" id="tel-top" href="#"></a>
+</div></header>
+
+<section class="hero"><div class="in">
+  <h1>Sizga mos mashinani toping</h1>
+  <p>Markasi, modeli yoki yili bo'yicha qidiring va sotuvchiga to'g'ridan-to'g'ri qo'ng'iroq qiling.</p>
+  <div class="search">
+    <label>Marka yoki model<input id="q" type="search" placeholder="Masalan: Gentra"></label>
+    <label>Yil (dan)<select id="yfrom"><option value="">Barchasi</option></select></label>
+    <label>Saralash<select id="sort">
+      <option value="new">Avval yangilari</option>
+      <option value="old">Avval eskilari</option>
+      <option value="name">Nomi bo'yicha</option>
+      <option value="cheap">Arzonlari avval</option>
+    </select></label>
+  </div>
+</div></section>
+
+<main>
+  <div class="bar">
+    <div class="chips" id="chips" role="group" aria-label="Marka bo'yicha filtr"></div>
+    <div id="count" aria-live="polite"></div>
+  </div>
+  <div id="grid" class="grid"></div>
+  <div id="state" class="msg">Yuklanmoqda…</div>
+</main>
+
+<footer>Mashina qo'shish yoki o'chirish uchun <a href="/admin">admin panelga</a> kiring.</footer>
+
+<dialog id="dlg" aria-labelledby="dlg-title"></dialog>
+
+<script>
+// Sozlamalar: o'zingizning raqamingiz va valyutani shu yerda o'zgartiring
+const CONTACT_PHONE = '+998 90 123 45 67';
+const CURRENCY = '$';
+
+const $ = id => document.getElementById(id);
+const tel = CONTACT_PHONE.replace(/[^\d+]/g, '');
+$('tel-top').href = 'tel:' + tel; $('tel-top').textContent = CONTACT_PHONE;
+
+let cars = [], brand = '';
+
+const title = c => ((c.brand || '') + ' ' + (c.model || '')).trim() || 'Nomsiz';
+const hasPrice = c => c.price !== undefined && c.price !== null && c.price !== '' && !isNaN(Number(c.price));
+const money = c => Number(c.price).toLocaleString('ru-RU') + ' ' + CURRENCY;
+
+function hue(s){ let h = 0; for (const ch of s) h = (h * 31 + ch.charCodeAt(0)) % 360; return h; }
+function carSVG(c){
+  const col = 'hsl(' + hue(title(c)) + ',50%,38%)';
+  return '<svg viewBox="0 0 240 100" role="img" aria-label="' + title(c).replace(/"/g,'') + '">' +
+    '<path d="M10 72V58Q12 50 28 48L60 44Q76 22 104 20H150Q176 22 192 44L222 50Q232 54 232 66V72Z" fill="' + col + '"/>' +
+    '<path d="M72 44Q84 28 104 27H120V44ZM128 27H148Q166 30 178 44H128Z" fill="#dfe9ef"/>' +
+    '<circle cx="62" cy="74" r="15" fill="#1b2430"/><circle cx="62" cy="74" r="6" fill="#aab6c2"/>' +
+    '<circle cx="182" cy="74" r="15" fill="#1b2430"/><circle cx="182" cy="74" r="6" fill="#aab6c2"/>' +
+    '<path d="M0 90H240" stroke="#14202b" stroke-width="2"/></svg>';
+}
+function pic(c){
+  const d = document.createElement('div'); d.className = 'pic';
+  if (c.image_url) { const i = document.createElement('img'); i.src = c.image_url; i.alt = title(c); i.onerror = () => { d.innerHTML = carSVG(c); }; d.append(i); }
+  else d.innerHTML = carSVG(c);
+  return d;
+}
+function plate(c){
+  const p = document.createElement('span'); p.className = 'plate';
+  p.innerHTML = '<i>UZ</i>'; const b = document.createElement('b'); b.textContent = c.year || '—'; p.append(b);
+  return p;
+}
+function priceEl(c){
+  const p = document.createElement('div');
+  p.className = 'price' + (hasPrice(c) ? '' : ' none');
+  p.textContent = hasPrice(c) ? money(c) : 'Narxi kelishiladi';
+  return p;
+}
+
+function filtered(){
+  const q = $('q').value.trim().toLowerCase(), yf = Number($('yfrom').value) || 0;
+  let r = cars.filter(c => (!brand || c.brand === brand) && (!q || title(c).toLowerCase().includes(q)) && (!yf || Number(c.year) >= yf));
+  const s = $('sort').value;
+  r.sort((a, b) =>
+    s === 'old' ? (a.year || 0) - (b.year || 0) :
+    s === 'name' ? title(a).localeCompare(title(b)) :
+    s === 'cheap' ? (hasPrice(a) ? Number(a.price) : 1e15) - (hasPrice(b) ? Number(b.price) : 1e15) :
+    (b.year || 0) - (a.year || 0));
+  return r;
+}
+
+function render(){
+  const r = filtered(), grid = $('grid');
+  grid.innerHTML = '';
+  $('count').textContent = r.length + ' ta mashina';
+  $('state').hidden = r.length > 0;
+  if (!r.length) { $('state').className = 'msg'; $('state').textContent = cars.length ? "Hech narsa topilmadi. Filtrlarni o'zgartirib ko'ring." : "Hozircha sotuvda mashina yo'q. Admin paneldan birinchi mashinani qo'shing."; }
+  for (const c of r) {
+    const card = document.createElement('article'); card.className = 'card';
+    const body = document.createElement('div'); body.className = 'body';
+    const h = document.createElement('h2'); h.className = 'name'; h.textContent = title(c);
+    const foot = document.createElement('div'); foot.className = 'foot';
+    const more = document.createElement('button'); more.className = 'btn ghost'; more.textContent = 'Batafsil';
+    more.onclick = () => openDetail(c);
+    const call = document.createElement('a'); call.className = 'btn sun'; call.href = 'tel:' + tel; call.textContent = "Qo'ng'iroq qilish";
+    foot.append(more, call);
+    body.append(plate(c), h, priceEl(c), foot);
+    card.append(pic(c), body); grid.append(card);
+  }
+}
+
+function buildFilters(){
+  const brands = [...new Set(cars.map(c => c.brand).filter(Boolean))].sort();
+  const chips = $('chips'); chips.innerHTML = '';
+  for (const b of ['', ...brands]) {
+    const x = document.createElement('button'); x.className = 'chip'; x.textContent = b || 'Barchasi';
+    x.setAttribute('aria-pressed', String(b === brand));
+    x.onclick = () => { brand = b; chips.querySelectorAll('.chip').forEach(k => k.setAttribute('aria-pressed', String(k === x))); render(); };
+    chips.append(x);
+  }
+  const years = [...new Set(cars.map(c => Number(c.year)).filter(Boolean))].sort((a, b) => b - a);
+  $('yfrom').innerHTML = '<option value="">Barchasi</option>' + years.map(y => '<option>' + y + '</option>').join('');
+}
+
+function openDetail(c){
+  const d = $('dlg'); d.innerHTML = '';
+  const body = document.createElement('div'); body.className = 'body';
+  const h = document.createElement('h2'); h.className = 'name'; h.id = 'dlg-title'; h.textContent = title(c);
+  const dl = document.createElement('dl');
+  const rows = [['Marka', c.brand], ['Model', c.model], ['Yili', c.year], ['Narxi', hasPrice(c) ? money(c) : 'Kelishiladi'], ['E\'lon raqami', '№' + c.id]];
+  for (const [k, v] of rows) { if (v === undefined || v === null || v === '') continue; const dt = document.createElement('dt'); dt.textContent = k; const dd = document.createElement('dd'); dd.textContent = v; dl.append(dt, dd); }
+  const act = document.createElement('div'); act.className = 'row';
+  const call = document.createElement('a'); call.className = 'btn sun'; call.href = 'tel:' + tel; call.textContent = CONTACT_PHONE + " ga qo'ng'iroq qilish";
+  const close = document.createElement('button'); close.className = 'btn ghost'; close.textContent = 'Yopish'; close.onclick = () => d.close();
+  act.append(call, close);
+  body.append(h, dl, act);
+  d.append(pic(c), body); d.showModal();
+}
+$('dlg').addEventListener('click', e => { if (e.target === $('dlg')) $('dlg').close(); });
+
+async function load(){
+  try {
+    const res = await fetch('/cars');
+    if (!res.ok) throw new Error(res.status);
+    cars = await res.json();
+    buildFilters(); render();
+  } catch (e) {
+    $('state').className = 'msg err';
+    $('state').textContent = "Mashinalar ro'yxatini yuklab bo'lmadi. Server ishlayotganini tekshiring va sahifani yangilang.";
+  }
+}
+['q', 'yfrom', 'sort'].forEach(id => $(id).addEventListener('input', render));
+load();
+</script>
+</body>
+</html>

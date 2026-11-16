@@ -1,6 +1,7 @@
 require('dotenv').config();
 
 const express = require('express');
+const path = require('path');
 const { createClient } = require('@supabase/supabase-js');
 const app = express();
 const PORT = process.env.PORT || 3005;
@@ -15,6 +16,7 @@ if (!supabaseUrl || !supabaseKey) {
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 app.use(express.json());
+app.use(express.static(path.join(__dirname, 'public')));
 
 // ---------- Фронтенд (HTML внутри server.js) ----------
 const page = `<!DOCTYPE html>
@@ -273,7 +275,7 @@ const page = `<!DOCTYPE html>
 </html>
 `;
 
-app.get('/', (req, res) => res.type('html').send(page));
+app.get('/admin', (req, res) => res.type('html').send(page));
 
 // ---------- Общие помощники ----------
 const validId = (req, res) => {
